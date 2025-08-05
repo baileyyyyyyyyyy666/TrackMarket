@@ -5,6 +5,7 @@ from data_source import DataSource  # This import statement needs to be here
 # Chart creating class
 from charts import ChartCreator
 import time
+import plotly
 
 def main():
     global update_count, status_container, crypto_container, weather_container
