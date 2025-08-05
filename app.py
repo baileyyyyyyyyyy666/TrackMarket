@@ -14,16 +14,14 @@ def main():
 
     status_container = st.empty()
     crypto_container = st.empty()
-    weather_container = st.empty()
     summary_container = st.empty()
 
     chart_creator = ChartCreator()
     data_source = DataSource()
 
     try:
-        # Get cryptocurrency and weather data
+        # Get cryptocurrency data
         crypto_data = data_source.get_crypto_prices()
-        weather_data = data_source.get_weather()
 
         # Update display containers
         with status_container.container():
@@ -33,9 +31,6 @@ def main():
         with crypto_container.container():
             chart = chart_creator.create_crypto_chart(crypto_data)
             st.plotly_chart(chart)
-
-        with weather_container.container():
-            chart_creator.create_weather_display(weather_data)
 
         with summary_container.container():
             chart_creator.create_summary_metrics(crypto_data)

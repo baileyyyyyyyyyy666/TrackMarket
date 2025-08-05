@@ -31,25 +31,6 @@ class ChartCreator:
         )
         return fig
 
-    # Create weather info display
-    def create_weather_display(self, weather_data):
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric(
-                label="Temperature",
-                value=f"{weather_data['temperature']}°F" if weather_data['temperature'] != 'N/A' else "N/A",
-                delta=None
-            )
-        with col2:
-            st.metric(
-                label="Humidity",
-                value=f"{weather_data['humidity']}%" if weather_data['humidity'] != 'N/A' else "N/A",
-                delta=None
-            )
-        with col3:
-            st.write(f"City: {weather_data['city']}")
-            st.write(f"Weather: {weather_data['description']}")
-
     # Create summary info about our data
     def create_summary_metrics(self, crypto_data):
         if not crypto_data.empty:
