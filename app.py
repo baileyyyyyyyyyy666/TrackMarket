@@ -1,6 +1,5 @@
 import streamlit as st
 import time
-import data_source
 from data_source import DataSource
 from charts import ChartCreator
 
@@ -16,6 +15,7 @@ def main():
     weather_container = st.empty()
 
     chart_creator = ChartCreator()  # Create an instance of the ChartCreator class
+    data_source = DataSource()
 
     # Initialize main loop variables
     update_count = 0
