@@ -1,11 +1,8 @@
 # Main plotting library
-import plotly
 import plotly.graph_objects as go
 # Simplified plotting functions
-import plotly.express as px
 # Web interface library
 import streamlit as st
-from plotly.matplotlylib.mplexporter.renderers import fig_to_vega
 
 
 class ChartCreator:
