@@ -1,4 +1,5 @@
 # Main plotting library
+import plotly
 import plotly.graph_objects as go
 # Simplified plotting functions
 import plotly.express as px

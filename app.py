@@ -1,38 +1,31 @@
 import streamlit as st
-from datetime import datetime
-# Data get class
-from data_source import DataSource  # This import statement needs to be here
-# Chart creating class
-from charts import ChartCreator
 import time
-import plotly
+import data_source
+from data_source import DataSource
+from charts import ChartCreator
+
+# Define constants
+UPDATE_INTERVAL_MIN = 5
+UPDATE_INTERVAL_MAX = 30
+DEFAULT_UPDATE_INTERVAL = 10
 
 def main():
-    global update_count, status_container, crypto_container, weather_container
-
-    data_source = DataSource()
-    chart_creator = ChartCreator()
-
     # Create containers for content (these will update automatically)
     status_container = st.empty()
     crypto_container = st.empty()
     weather_container = st.empty()
 
+    chart_creator = ChartCreator()  # Create an instance of the ChartCreator class
+
     # Initialize main loop variables
     update_count = 0
-    refresh_interval = st.slider(
-        "Update Every (seconds)",
-        min_value=5,
-        max_value=30,
-        value=10,
-        help="How often to get new data"
-    )
+    refresh_interval = DEFAULT_UPDATE_INTERVAL
 
     while True:
         try:
             # Get cryptocurrency and weather data
-            crypto_data = data_source.get_crypto_data()
-            weather_data = data_source.get_weather_data()
+            crypto_data = data_source.get_crypto_prices()
+            weather_data = data_source.get_weather()
 
             # Update display containers
             with status_container.container():
@@ -40,11 +33,11 @@ def main():
                 st.write(f"Got new cryptocurrency prices!")
 
             with crypto_container.container():
-                chart = chart_creator.create_crypto_chart(crypto_data)
+                chart = chart_creator.create_crypto_chart(crypto_data)  # Use the instance to call the method
                 st.plotly_chart(chart)
 
             with weather_container.container():
-                chart_creator.create_weather_display(weather_data)
+                chart_creator.create_weather_display(weather_data)  # Use the instance to call the method
 
             # Update summary metrics
             if not crypto_data.empty:
