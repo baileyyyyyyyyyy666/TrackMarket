@@ -1,5 +1,8 @@
+# Main plotting library
 import plotly.graph_objects as go
+# Web interface library
 import streamlit as st
+
 
 class ChartCreator:
 
